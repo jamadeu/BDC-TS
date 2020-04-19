@@ -16,5 +16,11 @@
     "prettier": "^2.0.4",
     "ts-node-dev": "^1.0.0-pre.44",
     "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "mysql2": "^2.1.0",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.24",
+    "uuidv4": "^6.0.7"
   }
 }
