@@ -4,7 +4,7 @@
   "port": 3306,
   "username": "root",
   "password": "bdc",
-  "database": "ndc_ts",
+  "database": "bdc_ts",
   "entities": [
     "./src/models/*.ts"
   ],
