@@ -6,12 +6,12 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity()
+@Entity('localities')
 export default class Locality {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @Column()
+  @Column({ unique: true })
   locality: string;
 
   @CreateDateColumn()
