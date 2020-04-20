@@ -6,11 +6,15 @@ import {
   UpdateDateColumn,
   ManyToMany,
   JoinTable,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 
-import Equipemnts from './Equipment';
+import Equipemnt from './Equipment';
+import Locality from './Locality';
+import User from './User';
 
-@Entity()
+@Entity('requests')
 export default class Request {
   @PrimaryGeneratedColumn('increment')
   id: number;
@@ -18,16 +22,16 @@ export default class Request {
   @Column()
   request: string;
 
-  @Column()
+  @Column({ nullable: true })
   reserveds_date: Date;
 
-  @Column()
+  @Column({ nullable: true })
   seal: string;
 
-  @Column()
+  @Column({ nullable: true })
   expedition_date: Date;
 
-  @Column()
+  @Column({ nullable: true })
   invoice: string;
 
   @Column()
@@ -35,6 +39,18 @@ export default class Request {
 
   @Column()
   user_id: number;
+
+  @ManyToOne(() => Locality)
+  @JoinColumn({ name: 'locality_id' })
+  locality: Locality;
+
+  @ManyToOne(() => User)
+  @JoinColumn({ name: 'user_id' })
+  user: User;
+
+  @ManyToMany(() => Equipemnt)
+  @JoinTable()
+  assigns: Equipemnt[];
 
   @CreateDateColumn()
   created_at: Date;
