@@ -11,6 +11,10 @@ interface Request {
 
 export default class UpdateUserService {
   public async execute({ id, login }: Request): Promise<User> {
+    if (!login) {
+      throw new AppError('Login invalid');
+    }
+
     const userRepository = getRepository(User);
 
     const userExistisById = await userRepository.findOne(id);
@@ -19,9 +23,9 @@ export default class UpdateUserService {
       throw new AppError('User not found');
     }
 
-    const userExistisByLogin = await userRepository.findOne(login);
+    const userExistsByLogin = await userRepository.findOne(login);
 
-    if (!userExistisByLogin) {
+    if (userExistsByLogin) {
       throw new AppError(`User ${login} already exists`);
     }
 
