@@ -31,7 +31,7 @@ export default class UpdateUserService {
 
     const userUpdated = userExistisById;
 
-    userUpdated.login = login;
+    userUpdated.login = login.toUpperCase();
 
     await userRepository.save(userUpdated);
 

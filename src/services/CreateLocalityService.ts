@@ -22,7 +22,9 @@ export default class CreateLocalityService {
       throw new AppError(`Locality ${locality} already exists`);
     }
 
-    const newLocality = localityRepository.create({ locality });
+    const newLocality = localityRepository.create({
+      locality: locality.toUpperCase(),
+    });
 
     await localityRepository.save(newLocality);
 

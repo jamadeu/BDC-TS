@@ -22,7 +22,9 @@ export default class CreateUserService {
       throw new AppError(`User ${login} already exists`);
     }
 
-    const user = userRepository.create({ login });
+    const user = userRepository.create({
+      login: login.toUpperCase(),
+    });
 
     await userRepository.save(user);
 

@@ -34,7 +34,7 @@ export default class UpdateLocalityService {
 
     const localityUpdated = localityExistsById;
 
-    localityUpdated.locality = locality;
+    localityUpdated.locality = locality.toUpperCase();
 
     await localityRepository.save(localityUpdated);
 
