@@ -6,7 +6,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity()
+@Entity('equipments')
 export default class Equipment {
   @PrimaryGeneratedColumn('increment')
   id: number;
@@ -17,7 +17,7 @@ export default class Equipment {
   @Column()
   serial: string;
 
-  @Column()
+  @Column({ unique: true })
   partnumber_serial: string;
 
   @CreateDateColumn()
