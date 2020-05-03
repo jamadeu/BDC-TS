@@ -1,9 +1,8 @@
 import { Router } from 'express';
-import { getRepository } from 'typeorm';
+import { getCustomRepository } from 'typeorm';
 
 import CreateEquipmentService from '../services/CreateEquipmentService';
-import Equipment from '../models/Equipment';
-import FindEquipmentByScan from '../services/FindEquipmentByScanService';
+import equipmentRepository from '../repositories/EquipmentRepository';
 
 const equipmentRouter = Router();
 
@@ -20,17 +19,17 @@ equipmentRouter.post('/', async (request, response) => {
 equipmentRouter.get('/', async (request, response) => {
   const { scan } = request.query;
 
-  const findEquipment = new FindEquipmentByScan();
+  const equiRepository = getCustomRepository(equipmentRepository);
 
-  const equipment = await findEquipment.excute({ scan: scan.toString() });
+  const equipment = await equiRepository.findByScan({ scan: scan.toString() });
 
   return response.json(equipment);
 });
 
 equipmentRouter.get('/', async (request, response) => {
-  const equipmentRepository = getRepository(Equipment);
+  const equiRepository = getCustomRepository(equipmentRepository);
 
-  const equipments = await equipmentRepository.find();
+  const equipments = await equiRepository.find();
 
   return response.json(equipments);
 });

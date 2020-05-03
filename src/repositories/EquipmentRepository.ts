@@ -1,4 +1,4 @@
-import { getRepository, Like } from 'typeorm';
+import { EntityRepository, Repository, getRepository, Like } from 'typeorm';
 
 import AppError from '../errors/AppErrors';
 
@@ -8,8 +8,9 @@ interface Request {
   scan: string;
 }
 
-export default class FindEquipmentByScan {
-  public async excute({ scan }: Request): Promise<Equipment> {
+@EntityRepository(Equipment)
+class EquipmentRepository extends Repository<Equipment> {
+  public async findByScan({ scan }: Request): Promise<Equipment> {
     const equipToFind = scan.toUpperCase().slice(1);
 
     const equipmentRepository = getRepository(Equipment);
@@ -25,3 +26,5 @@ export default class FindEquipmentByScan {
     return equipment;
   }
 }
+
+export default EquipmentRepository;
