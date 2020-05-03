@@ -10,7 +10,7 @@ import {
   JoinColumn,
 } from 'typeorm';
 
-import Equipemnt from './Equipment';
+import Equipment from './Equipment';
 import Locality from './Locality';
 import User from './User';
 
@@ -20,7 +20,7 @@ export default class Request {
   id: number;
 
   @Column()
-  request: string;
+  requestIdentification: string;
 
   @Column({ nullable: true })
   reserveds_date: Date;
@@ -48,9 +48,9 @@ export default class Request {
   @JoinColumn({ name: 'user_id' })
   user: User;
 
-  @ManyToMany(() => Equipemnt)
+  @ManyToMany(() => Equipment)
   @JoinTable()
-  assigns: Equipemnt[];
+  assigns: Equipment[];
 
   @CreateDateColumn()
   created_at: Date;
