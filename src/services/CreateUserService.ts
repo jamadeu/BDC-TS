@@ -16,9 +16,9 @@ export default class CreateUserService {
 
     const userRepository = getRepository(User);
 
-    const userExistis = await userRepository.findOne(login);
+    const userExists = await userRepository.findOne(login);
 
-    if (!userExistis) {
+    if (userExists) {
       throw new AppError(`User ${login} already exists`);
     }
 
