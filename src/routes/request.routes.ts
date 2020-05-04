@@ -1,6 +1,7 @@
 import { Router } from 'express';
 
 import CreateRequestService from '../services/CreateRequestService';
+import UpdateRequestService from '../services/UpdateRequestService';
 
 const requestRouter = Router();
 
@@ -17,6 +18,16 @@ requestRouter.post('/', async (request, response) => {
   });
 
   return response.json(requestCreated);
+});
+
+requestRouter.put('/:id', async (request, response) => {
+  const { id } = request.params;
+
+  const updateRequest = new UpdateRequestService();
+
+  const requestUpdated = await updateRequest.execute({ id, ...request.body });
+
+  return response.json(requestUpdated);
 });
 
 export default requestRouter;

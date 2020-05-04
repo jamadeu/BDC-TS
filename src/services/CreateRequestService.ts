@@ -48,7 +48,7 @@ export default class CreateRequestService {
     const requestRepository = getRepository(Request);
 
     const request = requestRepository.create({
-      requestIdentification: requestToCreate,
+      requestIdentification: requestToCreate.toUpperCase(),
       user_id,
       locality_id,
       reserveds_date: new Date(),
