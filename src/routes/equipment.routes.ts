@@ -16,7 +16,7 @@ equipmentRouter.post('/', async (request, response) => {
   return response.json(equipment);
 });
 
-equipmentRouter.get('/', async (request, response) => {
+equipmentRouter.get('/scan', async (request, response) => {
   const { scan } = request.query;
 
   const equiRepository = getCustomRepository(equipmentRepository);
