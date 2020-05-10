@@ -1,7 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 import AppError from '@shared/errors/AppErrors';
 import ILocalitiesRepository from '@modules/locality/repositories/ILocalitiesRepository';
-import Locality from '@modules/locality/infra/typeorm/entities//Locality';
+import Locality from '@modules/locality/infra/typeorm/entities/Locality';
 
 interface IRequest {
   locality: string;
