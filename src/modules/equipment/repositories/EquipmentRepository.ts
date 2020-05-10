@@ -1,16 +1,16 @@
 import { EntityRepository, Repository, getRepository, Like } from 'typeorm';
 
-import AppError from '../errors/AppErrors';
+import AppError from '@shared/errors/AppErrors';
 
-import Equipment from '../models/Equipment';
+import Equipment from '@modules/equipment/infra/typeorm/entities/Equipment';
 
-interface Request {
+interface IRequest {
   scan: string;
 }
 
 @EntityRepository(Equipment)
 class EquipmentRepository extends Repository<Equipment> {
-  public async findByScan({ scan }: Request): Promise<Equipment> {
+  public async findByScan({ scan }: IRequest): Promise<Equipment> {
     const equipToFind = scan.toUpperCase().slice(1);
 
     const equipmentRepository = getRepository(Equipment);

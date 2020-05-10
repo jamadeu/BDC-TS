@@ -1,39 +1,40 @@
-import { getRepository } from 'typeorm';
-
+import { inject, injectable } from 'tsyringe';
+import IUserRepository from '@modules/user/repositories/IUserRepository';
 import AppError from '@shared/errors/AppErrors';
 
-import User from '../infra/typeorm/User';
+import User from '@modules/user/infra/typeorm/entities/User';
 
-interface Request {
+interface IRequest {
   id: number;
   login: string;
 }
 
+@injectable()
 export default class UpdateUserService {
-  public async execute({ id, login }: Request): Promise<User> {
+  constructor(
+    @inject('UserRepository')
+    private userRepository: IUserRepository,
+  ) {}
+
+  public async execute({ id, login }: IRequest): Promise<User> {
     if (!login) {
       throw new AppError('Login invalid');
     }
-
-    const userRepository = getRepository(User);
-
-    const userExistisById = await userRepository.findOne(id);
+    const userExistisById = await this.userRepository.findById(id);
 
     if (!userExistisById) {
       throw new AppError('User not found');
     }
 
-    const userExistsByLogin = await userRepository.findOne(login);
+    const userExistsByLogin = await this.userRepository.findByLogin(login);
 
     if (userExistsByLogin) {
       throw new AppError(`User ${login} already exists`);
     }
 
     const userUpdated = userExistisById;
-
     userUpdated.login = login.toUpperCase();
-
-    await userRepository.save(userUpdated);
+    await this.userRepository.update(userUpdated);
 
     return userUpdated;
   }

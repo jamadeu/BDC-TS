@@ -1,39 +1,11 @@
 import { Router } from 'express';
-import { getRepository } from 'typeorm';
-
-import CreateUserService from '@modules/user/services/CreateUserService';
-import UpdateUserService from '@modules/user/services/UpdateUserService';
-
-import User from '@modules/user/infra/typeorm/User';
+import UserController from '../controllers/UserController';
 
 const userRouter = Router();
+const userController = new UserController();
 
-userRouter.post('/', async (request, response) => {
-  const { login } = request.body;
-
-  const createUser = new CreateUserService();
-
-  const user = await createUser.execute({ login });
-
-  return response.json(user);
-});
-
-userRouter.get('/', async (request, response) => {
-  const userRepository = getRepository(User);
-  const users = await userRepository.find();
-
-  return response.json(users);
-});
-
-userRouter.put('/:id', async (request, response) => {
-  const id = parseInt(request.params.id, 10);
-  const { login } = request.body;
-
-  const updateUser = new UpdateUserService();
-
-  const userUpdated = await updateUser.execute({ id, login });
-
-  return response.json(userUpdated);
-});
+userRouter.post('/', userController.create);
+userRouter.get('/', userController.index);
+userRouter.put('/:user_id', userController.update);
 
 export default userRouter;

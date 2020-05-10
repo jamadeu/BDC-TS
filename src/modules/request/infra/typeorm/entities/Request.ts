@@ -10,9 +10,9 @@ import {
   JoinColumn,
 } from 'typeorm';
 
-import Equipment from './Equipment';
-import Locality from './Locality';
-import User from './User';
+import Equipment from '@modules/equipment/infra/typeorm/entities/Equipment';
+import Locality from '@modules/locality/infra/typeorm/entities/Locality';
+import User from '@modules/user/infra/typeorm/entities/User';
 
 @Entity('requests')
 export default class Request {
