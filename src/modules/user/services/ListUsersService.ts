@@ -5,7 +5,7 @@ import User from '@modules/user/infra/typeorm/entities/User';
 @injectable()
 export default class CreateUserService {
   constructor(
-    @inject('UserRepository')
+    @inject('UsersRepository')
     private usersRepository: IUsersRepository,
   ) {}
 

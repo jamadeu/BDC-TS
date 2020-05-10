@@ -12,7 +12,7 @@ interface IRequest {
 @injectable()
 export default class UpdateUserService {
   constructor(
-    @inject('UserRepository')
+    @inject('UsersRepository')
     private usersRepository: IUsersRepository,
   ) {}
 
