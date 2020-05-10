@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import { getCustomRepository } from 'typeorm';
 
-import CreateEquipmentService from '../services/CreateEquipmentService';
-import equipmentRepository from '../repositories/EquipmentRepository';
+import CreateEquipmentService from '@modules/equipment/services/CreateEquipmentService';
+import equipmentRepository from '@modules/equipment/repositories/EquipmentRepository';
 
 const equipmentRouter = Router();
 

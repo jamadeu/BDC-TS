@@ -1,11 +1,11 @@
 import { getRepository, getCustomRepository } from 'typeorm';
 
-import AppError from '../errors/AppErrors';
+import AppError from '@shared/errors/AppErrors';
 
-import Request from '../models/Request';
-import Locality from '../models/Locality';
-import User from '../models/User';
-import equipmentRepository from '../repositories/EquipmentRepository';
+import Request from '@modules/request/infra/typeorm/entities/Request';
+import Locality from '@modules/locality/infra/typeorm/entities/Locality';
+import User from '@modules/user/infra/typeorm/entities/User';
+import equipmentRepository from '@modules/equipment/repositories/EquipmentRepository';
 
 interface RequestDTO {
   id: number;

@@ -1,10 +1,10 @@
 import { Router } from 'express';
 import { getRepository } from 'typeorm';
 
-import CreateUserService from '../services/CreateUserService';
-import UpdateUserService from '../services/UpdateUserService';
+import CreateUserService from '@modules/user/services/CreateUserService';
+import UpdateUserService from '@modules/user/services/UpdateUserService';
 
-import User from '../models/User';
+import User from '@modules/user/infra/typeorm/User';
 
 const userRouter = Router();
 

@@ -1,7 +1,7 @@
 import { getRepository } from 'typeorm';
 
-import Equipment from '../models/Equipment';
-import AppErrors from '../errors/AppErrors';
+import Equipment from '@modules/equipment/infra/typeorm/entities/Equipment';
+import AppErrors from '@shared/errors/AppErrors';
 
 interface Request {
   partnumber: string;

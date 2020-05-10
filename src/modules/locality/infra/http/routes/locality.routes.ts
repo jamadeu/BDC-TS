@@ -1,10 +1,10 @@
 import { Router } from 'express';
 import { getRepository } from 'typeorm';
 
-import CreateLocalityService from '../services/CreateLocalityService';
-import UpdateLocalityService from '../services/UpdateLocalityService';
+import CreateLocalityService from '@modules/locality/services/CreateLocalityService';
+import UpdateLocalityService from '@modules/locality/services/UpdateLocalityService';
 
-import Locality from '../models/Locality';
+import Locality from '@modules/locality/infra/typeorm/entities/Locality';
 
 const localityRouter = Router();
 

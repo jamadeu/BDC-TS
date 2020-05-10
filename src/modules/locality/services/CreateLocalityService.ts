@@ -1,8 +1,8 @@
 import { getRepository } from 'typeorm';
 
-import AppError from '../errors/AppErrors';
+import AppError from '@shared/errors/AppErrors';
 
-import Locality from '../models/Locality';
+import Locality from '@modules/locality/infra/typeorm/entities//Locality';
 
 interface Request {
   locality: string;
