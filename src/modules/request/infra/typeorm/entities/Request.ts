@@ -20,7 +20,7 @@ export default class Request {
   id: number;
 
   @Column()
-  requestIdentification: string;
+  request_reference: string;
 
   @Column({ nullable: true })
   reserveds_date: Date;
