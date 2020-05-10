@@ -6,7 +6,6 @@
   },
   "extends": [
     "airbnb-base",
-    "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
     "prettier/@typescript-eslint",
     "plugin:prettier/recommended"
@@ -36,7 +35,7 @@
         "allowExpressions": true
       }
     ],
-    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "_" }],
     "@typescript-eslint/interface-name-prefix": ["error", { "prefixWithI": "always" }],
     "import/extensions": [
       "error",
