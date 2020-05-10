@@ -1,33 +1,32 @@
-import { getRepository } from 'typeorm';
-
+import { inject, injectable } from 'tsyringe';
 import AppError from '@shared/errors/AppErrors';
-
+import ILocalitiesRepository from '@modules/locality/repositories/ILocalitiesRepository';
 import Locality from '@modules/locality/infra/typeorm/entities//Locality';
 
-interface Request {
+interface IRequest {
   locality: string;
 }
 
+@injectable()
 export default class CreateLocalityService {
-  public async execute({ locality }: Request): Promise<Locality> {
+  constructor(
+    @inject('LocalitiesRepository')
+    private localitiesRepository: ILocalitiesRepository,
+  ) {}
+
+  public async execute({ locality }: IRequest): Promise<Locality> {
     if (!locality) {
       throw new AppError('Locality invalid');
     }
-
-    const localityRepository = getRepository(Locality);
-
-    const localityExists = await localityRepository.findOne(locality);
-
+    const localityExists = await this.localitiesRepository.findByLocality(
+      locality,
+    );
     if (localityExists) {
       throw new AppError(`Locality ${locality} already exists`);
     }
-
-    const newLocality = localityRepository.create({
+    const newLocality = this.localitiesRepository.create({
       locality: locality.toUpperCase(),
     });
-
-    await localityRepository.save(newLocality);
-
     return newLocality;
   }
 }

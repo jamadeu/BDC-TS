@@ -1,40 +1,11 @@
 import { Router } from 'express';
-import { getRepository } from 'typeorm';
-
-import CreateLocalityService from '@modules/locality/services/CreateLocalityService';
-import UpdateLocalityService from '@modules/locality/services/UpdateLocalityService';
-
-import Locality from '@modules/locality/infra/typeorm/entities/Locality';
+import LocalitiesController from '@modules/locality/infra/http/controllers/LocalitiesController';
 
 const localityRouter = Router();
+const localitiesController = new LocalitiesController();
 
-localityRouter.post('/', async (request, response) => {
-  const { locality } = request.body;
-
-  const createLocality = new CreateLocalityService();
-
-  const newLocality = await createLocality.execute({ locality });
-
-  return response.json(newLocality);
-});
-
-localityRouter.get('/', async (request, response) => {
-  const localityRepository = getRepository(Locality);
-
-  const localities = await localityRepository.find();
-
-  return response.json(localities);
-});
-
-localityRouter.put('/:id', async (request, response) => {
-  const id = parseInt(request.params.id, 10);
-  const { locality } = request.body;
-
-  const updateLocality = new UpdateLocalityService();
-
-  const localityUpdated = await updateLocality.execute({ id, locality });
-
-  return response.json(localityUpdated);
-});
+localityRouter.post('/', localitiesController.create);
+localityRouter.get('/', localitiesController.index);
+localityRouter.put('/:user_id', localitiesController.update);
 
 export default localityRouter;
