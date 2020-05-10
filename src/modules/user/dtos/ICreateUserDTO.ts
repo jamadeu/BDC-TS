@@ -1,3 +1,3 @@
-export default interface ICreateUserDTO{
+export default interface ICreateUserDTO {
   login: string;
 }

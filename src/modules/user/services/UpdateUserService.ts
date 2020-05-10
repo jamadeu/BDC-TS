@@ -1,5 +1,5 @@
 import { inject, injectable } from 'tsyringe';
-import IUserRepository from '@modules/user/repositories/IUserRepository';
+import IUsersRepository from '@modules/user/repositories/IUsersRepository';
 import AppError from '@shared/errors/AppErrors';
 
 import User from '@modules/user/infra/typeorm/entities/User';
@@ -13,20 +13,20 @@ interface IRequest {
 export default class UpdateUserService {
   constructor(
     @inject('UserRepository')
-    private userRepository: IUserRepository,
+    private usersRepository: IUsersRepository,
   ) {}
 
   public async execute({ id, login }: IRequest): Promise<User> {
     if (!login) {
       throw new AppError('Login invalid');
     }
-    const userExistisById = await this.userRepository.findById(id);
+    const userExistisById = await this.usersRepository.findById(id);
 
     if (!userExistisById) {
       throw new AppError('User not found');
     }
 
-    const userExistsByLogin = await this.userRepository.findByLogin(login);
+    const userExistsByLogin = await this.usersRepository.findByLogin(login);
 
     if (userExistsByLogin) {
       throw new AppError(`User ${login} already exists`);
@@ -34,7 +34,7 @@ export default class UpdateUserService {
 
     const userUpdated = userExistisById;
     userUpdated.login = login.toUpperCase();
-    await this.userRepository.update(userUpdated);
+    await this.usersRepository.update(userUpdated);
 
     return userUpdated;
   }

@@ -1,9 +1,8 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
-
 import CreateUserService from '@modules/user/services/CreateUserService';
 import UpdateUserService from '@modules/user/services/UpdateUserService';
-import ListUserService from '@modules/user/services/ListUserService';
+import ListUsersService from '@modules/user/services/ListUsersService';
 
 export default class UserController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -25,8 +24,8 @@ export default class UserController {
   }
 
   public async index(request: Request, response: Response): Promise<Response> {
-    const listUser = container.resolve(ListUserService);
-    const users = await listUser.execute();
+    const listUsers = container.resolve(ListUsersService);
+    const users = await listUsers.execute();
     return response.json(users);
   }
 }

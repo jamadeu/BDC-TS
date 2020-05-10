@@ -1,6 +1,6 @@
 import { inject, injectable } from 'tsyringe';
 import AppError from '@shared/errors/AppErrors';
-import IUserRepository from '@modules/user/repositories/IUserRepository';
+import IUsersRepository from '@modules/user/repositories/IUsersRepository';
 import User from '@modules/user/infra/typeorm/entities/User';
 
 interface IRequest {
@@ -11,7 +11,7 @@ interface IRequest {
 export default class CreateUserService {
   constructor(
     @inject('UserRepository')
-    private userRepository: IUserRepository,
+    private usersRepository: IUsersRepository,
   ) {}
 
   public async execute({ login }: IRequest): Promise<User> {
@@ -19,13 +19,13 @@ export default class CreateUserService {
       throw new AppError('Login invalid');
     }
 
-    const userExists = await this.userRepository.findByLogin(login);
+    const userExists = await this.usersRepository.findByLogin(login);
 
     if (userExists) {
       throw new AppError(`User ${login} already exists`);
     }
 
-    const user = this.userRepository.create({
+    const user = this.usersRepository.create({
       login: login.toUpperCase(),
     });
 
