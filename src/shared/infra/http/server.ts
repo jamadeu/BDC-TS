@@ -1,15 +1,14 @@
 import 'reflect-metadata';
-
 import express, { Request, Response, NextFunction } from 'express';
 import 'express-async-errors';
-
 import routes from './routes';
 import AppError from '@shared/errors/AppErrors';
-
+import cors from 'cors';
 import '@shared/infra/typeorm';
+import '@shared/container';
 
 const app = express();
-
+app.use(cors());
 app.use(express.json());
 app.use(routes);
 
