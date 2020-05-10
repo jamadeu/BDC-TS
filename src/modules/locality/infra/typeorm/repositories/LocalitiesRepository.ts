@@ -3,7 +3,7 @@ import ILocalitiesRepository from '@modules/locality/repositories/ILocalitiesRep
 import ICreateLocalityDTO from '@modules/locality/dtos/ICreateLocalityDTO';
 import Locality from '../entities/Locality';
 
-export default class LocalityRepository implements ILocalitiesRepository {
+export default class LocalitiesRepository implements ILocalitiesRepository {
   private ormRepository: Repository<Locality>;
 
   constructor() {
