@@ -1,5 +1,11 @@
 import { Router } from 'express';
+import RequestsController from '@modules/request/infra/http/controllers/RequestsController';
 
-const requestRouter = Router();
+const requestsRouter = Router();
+const requestsController = new RequestsController();
 
-export default requestRouter;
+requestsRouter.post('/', requestsController.create);
+requestsRouter.put('/', requestsController.update);
+requestsRouter.get('/:request_id', requestsController.show);
+
+export default requestsRouter;
