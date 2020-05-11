@@ -5,6 +5,8 @@ import ILocalitiesRepository from '@modules/locality/repositories/ILocalitiesRep
 import LocalitiesRepository from '@modules/locality/infra/typeorm/repositories/LocalitiesRepository';
 import IEquipmentsRepository from '@modules/equipment/repositories/IEquipmentsRepository';
 import EquipmentsRepository from '@modules/equipment/infra/typeorm/repositories/EquipmentsRepository';
+import IRequestsRepository from '@modules/request/repositories/IRequestsRepository';
+import RequestsRepository from '@modules/request/infra/typeorm/repositories/RequestsRepository';
 
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
@@ -14,8 +16,11 @@ container.registerSingleton<ILocalitiesRepository>(
   'LocalitiesRepository',
   LocalitiesRepository,
 );
-
 container.registerSingleton<IEquipmentsRepository>(
   'EquipmentsRepository',
   EquipmentsRepository,
+);
+container.registerSingleton<IRequestsRepository>(
+  'RequestsRepository',
+  RequestsRepository,
 );
